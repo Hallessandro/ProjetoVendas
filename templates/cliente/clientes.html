@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+     <td><a href="{% url 'exibirTeste' %}"> teste</a></td>
+    <h2>Clientes</h2>
+    <p><a href="{% url 'cliente_new' %}" class="btn btn-primary" >Cadastrar cliente</a></p>
+
+<table class="table table-hover">
+    <tr>
+    <th>Nome</th>
+    <th>E-mail</th>
+    <th clospan="2">Operações</th>
+  </tr>
+
+    {% for cliente in clientes %}
+        <tr>
+            <td><a href="{% url 'exibircliente' cliente.id %}"> {{ cliente.nome | upper }}</a></td>
+            <td>{{ cliente.email }}</td>
+            <td><a href="{% url 'cliente_update' cliente.pk %}" class="btn btn-primary" >Atualizar</a></td>
+            <td><a href="{% url 'cliente_delete' cliente.pk %}" class="btn btn-danger" >Excluir</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
