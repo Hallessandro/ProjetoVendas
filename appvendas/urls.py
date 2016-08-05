@@ -19,8 +19,14 @@ urlpatterns=[
 
     url(r'^vendas/$',listarvendas,name='vendas'),
     url(r'^clientes/$',listarclientes,name='clientes'),
-    url(r'^clientes/exibir/(\d+)$',exibircliente,name='exibircliente'),
-    url(r'^cargos/$',listarcargos,name='cargos'),
+
+    url(r'^clientes/$', listarclientes, name='clientes'),
+    url(r'^clientes/exibir/(\d+)$', exibircliente, name='exibircliente'),
+    url(r'^clientes/new/$', cliente_new, name='cliente_new'),
+    url(r'^clientes/update/(?P<pk>\d+)$', cliente_update, name='cliente_update'),
+    url(r'^clientes/delete/(?P<pk>\d+)$', cliente_delete, name='cliente_delete'),
+
+    url(r'^cargos/$', listarcargos, name='cargos'),
     url(r'^funcionarios/$',listarfuncionrios,name='funcionarios'),
     url(r'^funcionarios/exibir/(\d+)',exibirfuncionario,name='exibirfuncionario')
 

@@ -10,3 +10,7 @@ class ProdutoForm(ModelForm):
         model=Produto
         fields=('descricao','unidade','valorUnitario')
 
+class ClienteForm(ModelForm):
+    class Meta:
+        model=Cliente
+        fields=('nome','email','telefone','endereco')

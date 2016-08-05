@@ -110,18 +110,48 @@ def listarvendas(request):
     vendas=Venda.objects.all()
     lista={'vendas':vendas}
     return render(request,'vendas.html',lista)
+
 def listarclientes(request):
     clientes=Cliente.objects.all().order_by('nome')
     lista={'clientes':clientes}
-    return render(request,'clientes.html',lista)
+    return render(request,'cliente/clientes.html',lista)
 def exibircliente(request,idcliente):
     cliente=Cliente.objects.get(id=idcliente)
     contexto={'cliente':cliente}
     return render(request,'exibircliente.html',contexto)
+def cliente_update(request,pk):
+    cliente=Cliente.objects.get(id=pk)
+    if(request.method=='POST'):
+        form=ClienteForm(request.POST,instance=cliente)
+        if(form.is_valid()):
+            form.save()
+            return redirect('clientes')
+    else:
+        form=ClienteForm(instance=cliente)
+        dados={'form':form,'cliente':cliente}
+        return render(request,'cliente/cliente_form.html',dados)
+
+def cliente_delete(request,pk):
+    cliente = Cliente.objects.get(id=pk)
+    cliente.delete()
+    return redirect('clientes')
+
+def cliente_new(request):
+    if(request.method=='POST'):
+        form=ClienteForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            return redirect('clientes')
+    else:
+        form=ClienteForm()
+        dados={'form':form}
+        return render(request,'cliente/cliente_form.html',dados)
+
 def listarcargos(request):
     cargos=Cargo.objects.all().order_by('descricao')
     lista={'cargos':cargos}
     return render(request,'cargos.html',lista)
+
 def listarfuncionrios(request):
     funcionarios=Funcionario.objects.all().order_by('nome')
     lista={'funcionarios':funcionarios}
