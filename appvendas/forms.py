@@ -1,6 +1,6 @@
 from django.forms import ModelForm
+from .models import * 
 
-from appvendas.models import *
 class UnidadeForm(ModelForm):
    class Meta:
        model=Unidade
@@ -14,3 +14,8 @@ class ClienteForm(ModelForm):
     class Meta:
         model=Cliente
         fields=('nome','email','telefone','endereco')
+
+class FuncionarioForm(ModelForm):
+	class Meta:
+		model = Funcionario
+		fields=('nome', 'matricula', 'cargo')

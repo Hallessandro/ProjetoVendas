@@ -106,6 +106,7 @@ def unidade_delete(request,pk):
     unidade=Unidade.objects.get(id=pk)
     unidade.delete()
     return redirect('unidade_list')
+
 def listarvendas(request):
     vendas=Venda.objects.all()
     lista={'vendas':vendas}
@@ -152,11 +153,53 @@ def listarcargos(request):
     lista={'cargos':cargos}
     return render(request,'cargos.html',lista)
 
-def listarfuncionrios(request):
-    funcionarios=Funcionario.objects.all().order_by('nome')
-    lista={'funcionarios':funcionarios}
-    return render(request,'funcionarios.html',lista)
-def exibirfuncionario(request,idfuncionario):
-    funcionario=Funcionario.objects.get(id=idfuncionario)
-    contexto={'funcionario':funcionario}
-    return render(request,'exibirfuncionario.html',contexto)
+def funcionario_list(request):
+    criterio=request.GET.get('criterio')
+    if(criterio):
+        funcionarios=Funcionario.objects.filter(nome__contains=criterio)
+    else:
+        funcionarios = Funcionario.objects.all().order_by('nome')
+        criterio=""
+    paginator = Paginator(funcionarios, 4)
+    page = request.GET.get('page')
+    try:
+        funcionarios = paginator.page(page)
+    except PageNotAnInteger:
+        funcionarios = paginator.page(1)
+    except EmptyPage:
+        funcionarios = paginator.page(paginator.num_pages)
+    dados={'funcionarios':funcionarios,'criterio':criterio}
+
+    return render(request, 'funcionario/funcionario_list.html', dados)
+
+def funcionario_detail(request, pk):
+    funcionario=Funcionario.objects.get(id=pk)
+    return render(request, 'funcionario/funcionario_detail.html', {'funcionario':funcionario})
+
+def funcionario_new(request):
+    if (request.method=="POST"):
+        form=FuncionarioForm(request.POST)
+        if (form.is_valid()):
+            form.save()
+            return redirect('funcionario_list')
+    else:
+        form=FuncionarioForm()
+        dados={'form':form}
+        return render(request, 'funcionario/funcionario_form.html', dados)
+
+def funcionario_update(request,pk):
+    funcionario=Funcionario.objects.get(id=pk)
+    if (request.method=="POST"):
+        form=FuncionarioForm(request.POST,instance=funcionario)
+        if (form.is_valid()):
+            form.save()
+            return redirect('funcionario_list')
+    else:
+        form=FuncionarioForm(instance=funcionario)
+        dados={'form':form}
+        return render(request, 'funcionario/funcionario_form.html', dados)
+
+def funcionario_delete(request,pk):
+    funcionario=Funcionario.objects.get(id=pk)
+    funcionario.delete()
+    return redirect('funcionario_list')

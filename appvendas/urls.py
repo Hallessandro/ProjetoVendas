@@ -16,6 +16,12 @@ urlpatterns=[
     url(r'^unidade/update/(?P<pk>\d+)$',unidade_update,name='unidade_update'),
     url(r'^unidade/delete/(?P<pk>\d+)$',unidade_delete,name='unidade_delete'),
 
+    url(r'^funcionario/list$', funcionario_list, name='funcionario_list'),
+    url(r'^funcionario/new/$',funcionario_new,name='funcionario_new'),
+    url(r'^funcionario/update/(?P<pk>\d+)$',funcionario_update,name='funcionario_update'),
+    url(r'^funcionario/detail/(?P<pk>\d+)$', funcionario_detail, name='funcionario_detail'),
+    url(r'^funcionario/delete/(?P<pk>\d+)$',funcionario_delete,name='funcionario_delete'),
+
 
     url(r'^vendas/$',listarvendas,name='vendas'),
     url(r'^clientes/$',listarclientes,name='clientes'),
@@ -27,7 +33,5 @@ urlpatterns=[
     url(r'^clientes/delete/(?P<pk>\d+)$', cliente_delete, name='cliente_delete'),
 
     url(r'^cargos/$', listarcargos, name='cargos'),
-    url(r'^funcionarios/$',listarfuncionrios,name='funcionarios'),
-    url(r'^funcionarios/exibir/(\d+)',exibirfuncionario,name='exibirfuncionario')
 
 ]
