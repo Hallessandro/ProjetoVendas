@@ -5,6 +5,7 @@ class UnidadeForm(ModelForm):
    class Meta:
        model=Unidade
        fields=('descricao','sigla')
+
 class ProdutoForm(ModelForm):
     class Meta:
         model=Produto
@@ -18,4 +19,9 @@ class ClienteForm(ModelForm):
 class FuncionarioForm(ModelForm):
 	class Meta:
 		model = Funcionario
-		fields=('nome', 'matricula', 'cargo')
+		fields=('nome', 'matricula', 'cargo', 'telefone', 'email')
+
+class CargoForm(ModelForm):
+  class Meta:
+    model = Cargo
+    fields=('descricao',)

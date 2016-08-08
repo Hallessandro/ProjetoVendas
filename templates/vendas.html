@@ -1,35 +1,31 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-    <h2>Vendas</h2>
-
-    {% for venda in vendas %}
-        <ul>
-        <li><h3>Venda - {{ venda.id }}</h3></li>
-        <li>Cliente: {{ venda.cliente.nome }}</li>
-        <li>Funcionário: {{ venda.vendedor.nome }}</li>
-        <li>Data da Venda {{ venda.dataVenda|date:'d/m/Y'  }}</li>
-        </ul>
-        <h4>Itens</h4>
-        <table>
+    <center><h2>Vendas</h2></center>
+    <hr>
+      <table class="table table-bordered table-hover">
+        <tr>
+          <th>Venda</th>
+          <th>Cliente</th>
+          <th>Funcionário</th>
+          <th>Data da venda</th>
+          <th>Itens da venda</th>
+        </tr>  
+        {% for venda in vendas  %}
           <tr>
-            <th>Descrição</th>
-            <th>Unidade</th>
-              <th>Quantidade</th>
-              <th>Valor Unitário</th>
-              <th>Subtotal</th>
+            <td>{{venda.id}}</td>
+            <td>{{venda.cliente.nome}}</td>
+            <td>{{ venda.vendedor.nome }}</td>
+            <td>{{ venda.dataVenda|date:'d/m/Y'  }}</td>
+            <td>
+              {% for item in venda.vendaproduto_set.all %}
+                  <p>{{ item.quantidade }} x {{ item.produto.descricao }}</p>
+                  <p>Preço da unidade :{{ item.produto.valorUnitario }} R$</p>
+                  <p>Subtotal: {{item.subtotal}} R$</p>
+              {% endfor %}
+            </td>
           </tr>
-            {% for item in venda.vendaproduto_set.all %}
-               <tr>
-               <td>{{ item.produto.descricao }}</td>
-                <td>{{ item.produto.unidade.descricao }}</td>
-               <td>{{ item.quantidade }}</td>
-               <td>{{ item.produto.valorUnitario }}</td>
-               <td>{{item.subtotal }}</td>
-               </tr>
-            {% endfor %}
-        </table>
-    {% endfor %}
-
-
+        {% endfor %}
+      </table>
+  
 {% endblock %}

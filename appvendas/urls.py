@@ -2,9 +2,10 @@ from django.conf.urls import patterns,include,url
 from appvendas.views import *
 urlpatterns=[
     url(r'^$',home,name='home'),
+    url(r'^contato$',contato,name='contato'),
 
     url(r'^produto/list$',produto_list,name='produto_list'),
-    #url(r'^produto/detail/(?P<pk>\d+)$',produto_detail,name='produto_detail'),
+    url(r'^produto/detail/(?P<pk>\d+)$',produto_detail,name='produto_detail'),
     url(r'^produto/new/$',produto_new,name='produto_new'),
     url(r'^produto/update/(?P<pk>\d+)$',produto_update,name='produto_update'),
     url(r'^produto/delete/(?P<pk>\d+)$',produto_delete,name='produto_delete'),
@@ -24,14 +25,13 @@ urlpatterns=[
 
 
     url(r'^vendas/$',listarvendas,name='vendas'),
-    url(r'^clientes/$',listarclientes,name='clientes'),
 
-    url(r'^clientes/$', listarclientes, name='clientes'),
-    url(r'^clientes/exibir/(\d+)$', exibircliente, name='exibircliente'),
+    url(r'^cliente/list$', cliente_list, name='cliente_list'),
+    url(r'^cliente/detail/(?P<pk>\d+)$', cliente_detail, name='cliente_detail'),
     url(r'^clientes/new/$', cliente_new, name='cliente_new'),
     url(r'^clientes/update/(?P<pk>\d+)$', cliente_update, name='cliente_update'),
     url(r'^clientes/delete/(?P<pk>\d+)$', cliente_delete, name='cliente_delete'),
 
-    url(r'^cargos/$', listarcargos, name='cargos'),
-
+    url(r'^cargo/list$', cargo_list, name='cargo_list'),
+    url(r'^cargo/new/$', cargo_new, name='cargo_new'),
 ]

@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block conteudo %}
-        <h1 style="margin: 30px">{% if unidade %}Editar Unidade{% else %}Criar Unidade{% endif%}</h1>
-
+        <center><h2 style="margin: 30px">{% if unidade %}Editar Unidade{% else %}Criar Unidade{% endif%}</h2></center>
+		<hr>
         <form method="POST" role="form">
-
         {% csrf_token %}
-        {{ form.as_table }}
+        {% for field in form %}
+        	<p><h4><span class="label label-default" for="{{field.name}}">{{ field.name.upper}}</span></h4>
+            {{field |add_class:'form-control'}}</p>
+        {% endfor %}
+		<br>       
         <input type="submit" class="btn btn-primary" value="Salvar">
         </form>
 

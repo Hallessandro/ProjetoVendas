@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-    <h2>Dados da Unidade </h2>
-    <ul>
-    <li>Descrição: {{ unidade.descricao }}</li>
-    <li>Sigla : {{ unidade.sigla }}</li>
-    </ul>
+    <center><h2>Dados da Unidade </h2></center>
+    <hr>
+    <div class="list-group">
+    	<a href="#" class="list-group-item active">Descrição: {{ unidade.descricao}}</a>
+    	<a href="#" class="list-group-item">Sigla: {{unidade.sigla}}</a>
+    </div>
 {% endblock %}

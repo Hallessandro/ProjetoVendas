@@ -1,11 +1,11 @@
-
 {% extends 'base.html' %}
 {% block conteudo %}
-    <h2>Cargos</h2>
-<table>
+    <center><h2>Cargos</h2></center>
+    <hr>
+<p><a href="{% url 'cargo_new' %}" class="btn btn-primary" >Cadastrar Novo Cargo</a></p>
+<table class="table table-bordered table-hover">
   <tr>
     <th>Descrição</th>
-    <p>comentario</p>
   </tr>
     {% for cargo in cargos %}
         <tr>
