@@ -23,7 +23,7 @@
             <td>{{ produto.unidade.sigla }}</td>
             <td>{{ produto.valorUnitario | floatformat:2 }}</td>
             <td><a href="{% url 'produto_update' produto.pk %}" class="btn btn-primary">Atualizar</a> </td>
-            <td><a href="{% url 'produto_delete' produto.pk %}" class="btn btn-danger">Deletar</a> </td>
+            <td><a href="{% url 'produto_delete' produto.pk %}" class="btn btn-danger">Deletar</a></td>
         </tr>
     {% endfor %}
 </table>

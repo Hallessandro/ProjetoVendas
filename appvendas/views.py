@@ -114,10 +114,21 @@ def unidade_delete(request,pk):
     unidade.delete()
     return redirect('unidade_list')
 
-def listarvendas(request):
+def venda_list(request):
     vendas=Venda.objects.all()
     lista={'vendas':vendas}
-    return render(request,'vendas.html',lista)
+    return render(request,'venda/venda_list.html',lista)
+
+def venda_new(request):
+    if(request.method=='POST'):
+        form=VendaForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            return redirect('venda_list')
+    else:
+        form=VendaForm()
+        dados={'form':form}
+        return render(request,'venda/venda_form.html',dados)
 
 def cliente_list(request):
     criterio=request.GET.get('criterio')
@@ -205,6 +216,23 @@ def cargo_new(request):
         form=CargoForm()
         dados={'form':form}
         return render(request,'cargo/cargo_form.html',dados)
+
+def cargo_update(request,pk):
+    cargo=Cargo.objects.get(id=pk)
+    if (request.method=="POST"):
+        form=CargoForm(request.POST,instance=cargo)
+        if (form.is_valid()):
+            form.save()
+            return redirect('cargo_list')
+    else:
+        form=CargoForm(instance=cargo)
+        dados={'form':form}
+        return render(request, 'cargo/cargo_form.html', dados)
+
+def cargo_delete(request,pk):
+    cargo=Cargo.objects.get(id=pk)
+    cargo.delete()
+    return redirect('cargo_list')
 
 def funcionario_list(request):
     criterio=request.GET.get('criterio')

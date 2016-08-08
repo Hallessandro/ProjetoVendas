@@ -24,7 +24,7 @@ urlpatterns=[
     url(r'^funcionario/delete/(?P<pk>\d+)$',funcionario_delete,name='funcionario_delete'),
 
 
-    url(r'^vendas/$',listarvendas,name='vendas'),
+    url(r'^venda/list$',venda_list,name='venda_list'),
 
     url(r'^cliente/list$', cliente_list, name='cliente_list'),
     url(r'^cliente/detail/(?P<pk>\d+)$', cliente_detail, name='cliente_detail'),
@@ -34,4 +34,6 @@ urlpatterns=[
 
     url(r'^cargo/list$', cargo_list, name='cargo_list'),
     url(r'^cargo/new/$', cargo_new, name='cargo_new'),
+    url(r'^cargo/update/(?P<pk>\d+)$', cargo_update, name='cargo_update'),
+    url(r'^cargo/delete/(?P<pk>\d+)$', cargo_delete, name='cargo_delete'),
 ]

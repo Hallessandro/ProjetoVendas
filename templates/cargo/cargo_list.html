@@ -13,12 +13,17 @@
 <table class="table table-bordered table-hover">
   <tr>
     <th>Descrição</th>
+    <th colspan="2">Operações</th>
   </tr>
     {% for cargo in cargos %}
         <tr>
             <td> {{ cargo.descricao | upper }}</td>
+            <td><a href="{% url 'cargo_update' cargo.pk %}" class="btn btn-primary">Atualizar</a></td>
+            <td><a href="{% url 'cargo_delete' cargo.pk %}" class="btn btn-danger">Deletar</a></td>
         </tr>
     {% endfor %}
 </table>
 {% include 'utils/paginacao.html' %}
 {% endblock %}
+
+
