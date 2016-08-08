@@ -176,9 +176,24 @@ def cliente_new(request):
         return render(request,'cliente/cliente_form.html',dados)
 
 def cargo_list(request):
-    cargos=Cargo.objects.all().order_by('descricao')
-    lista={'cargos':cargos}
-    return render(request,'cargo/cargo_list.html',lista)
+    criterio=request.GET.get('criterio')
+    if (criterio):
+        cargos=Cargo.objects.filter(descricao__contains=criterio).order_by('descricao')
+    else:
+        cargos=Cargo.objects.all().order_by('descricao')
+        criterio=""
+    #Cria o mecanimos de paginação
+    paginator=Paginator(cargos,2)
+    page=request.GET.get('page')
+    try:
+        cargos=paginator.page(page)
+    except PageNotAnInteger:
+        cargos=paginator.page(1)
+    except EmptyPage:
+        cargos=paginator.page(paginator.num_pages)
+
+    dados={'cargos':cargos,'criterio':criterio,'paginator':paginator,'page_obj':cargos}
+    return render(request, 'cargo/cargo_list.html', dados)
 
 def cargo_new(request):
     if (request.method=="POST"):
